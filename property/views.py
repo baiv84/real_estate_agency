@@ -3,6 +3,7 @@ from django.shortcuts import render
 
 from property.models import Flat
 
+NEW_BUILDING_YEAR = 2015
 
 def format_price(value):
     try:
@@ -24,6 +25,8 @@ def show_flats(request):
         flats = flats.filter(price__gt=min_price)
     if max_price:
         flats = flats.filter(price__lt=max_price)
+    if new_building:
+        flats = flats.filter(construction_year__gte=NEW_BUILDING_YEAR)
 
     towns = Flat.objects.values_list(
         'town', flat=True).distinct().order_by('town')
