@@ -13,6 +13,7 @@ class FlatAdmin(admin.ModelAdmin):
 
 class ComplaintAdmin(admin.ModelAdmin):
     list_display = ('user', 'flat', 'text')
+    list_filter = ('user', )
     raw_id_fields = ('flat',)
 
 
