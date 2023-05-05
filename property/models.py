@@ -59,14 +59,25 @@ class Flat(models.Model):
         db_index=True)
 
     new_building = models.BooleanField('Новостройка', default=None, null=True, blank=True)
+ 
+    liked_by = models.ManyToManyField('UserProfile', verbose_name='кто лайкнул', related_name='liked_flats', blank=True)
 
     def __str__(self):
         """Object string representation"""
         return f'{self.town}, {self.address} ({self.price}р.)'
 
 
+class UserProfile(models.Model):
+    """User wrapping class"""
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        """Object string representation"""
+        return f'{self.user}'
+
+
 class Complaint(models.Model):
     """Complaint model class"""
-    user = models.ForeignKey(User, verbose_name='Кто жаловался', on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfile, verbose_name='Кто жаловался', on_delete=models.CASCADE)
     flat = models.ForeignKey(Flat, verbose_name='Квартира, на которую жаловались', on_delete=models.CASCADE)
     text = models.TextField('Текст жалобы', null=True)
