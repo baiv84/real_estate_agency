@@ -8,7 +8,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('property', '0004_complaint'),
+        ('property', '0004_complaint_create_model'),
     ]
 
     operations = [

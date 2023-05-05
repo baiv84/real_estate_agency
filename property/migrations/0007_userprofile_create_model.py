@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('property', '0010_delete_like'),
+        ('property', '0006_complaint_alter_text_field'),
     ]
 
     operations = [

@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('property', '0005_auto_20230504_1945'),
+        ('property', '0005_complaint_alter_fields'),
     ]
 
     operations = [
