@@ -91,8 +91,8 @@ class Owner(models.Model):
     flats = models.ManyToManyField('Flat', verbose_name='Квартиры в собственности', related_name='owners')
 
     def __str__(self):
-        """Object string representation"""
-        return f'{self.owner_name}'
+       """Object string representation"""
+       return f'{self.owner_name}'
     
 
 class Complaint(models.Model):
