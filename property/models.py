@@ -65,6 +65,7 @@ class Flat(models.Model):
  
     liked_by = models.ManyToManyField('UserProfile', verbose_name='кто лайкнул', related_name='liked_flats', blank=True)
 
+
     def __str__(self):
         """Object string representation"""
         return f'{self.town}, {self.address} ({self.price}р.)'
@@ -78,6 +79,21 @@ class UserProfile(models.Model):
         """Object string representation"""
         return f'{self.user}'
 
+
+class Owner(models.Model):
+    """Flat owner data model"""
+    owner_name = models.CharField('ФИО владельца', max_length=100)
+
+    owners_phonenumber = models.CharField('Номер владельца', max_length=20)
+    
+    owner_pure_phone = PhoneNumberField('Нормализованный номер владельца', null=True, blank=True)
+
+    flats = models.ManyToManyField('Flat', verbose_name='Квартиры в собственности', related_name='owners')
+
+    def __str__(self):
+        """Object string representation"""
+        return f'{self.owner_name}'
+    
 
 class Complaint(models.Model):
     """Complaint model class"""
