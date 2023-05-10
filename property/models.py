@@ -5,13 +5,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Flat(models.Model):
-    """Flat model class"""
-    owner = models.CharField('ФИО владельца', max_length=200)
-    
-    owners_phonenumber = models.CharField('Номер владельца', max_length=20)
-    
-    owner_pure_phone = PhoneNumberField('Нормализованный номер владельца', null=True, blank=True)
-    
+    """Flat model class"""        
     created_at = models.DateTimeField(
         'Когда создано объявление',
         default=timezone.now,
@@ -82,11 +76,11 @@ class UserProfile(models.Model):
 
 class Owner(models.Model):
     """Flat owner data model"""
-    owner_name = models.CharField('ФИО владельца', max_length=100)
+    owner_name = models.CharField('ФИО владельца', max_length=100, db_index=True)
 
-    owners_phonenumber = models.CharField('Номер владельца', max_length=20)
+    owners_phonenumber = models.CharField('Номер владельца', max_length=20, db_index=True)
     
-    owner_pure_phone = PhoneNumberField('Нормализованный номер владельца', null=True, blank=True)
+    owner_pure_phone = PhoneNumberField('Нормализованный номер владельца', null=True, blank=True, db_index=True)
 
     flats = models.ManyToManyField('Flat', verbose_name='Квартиры в собственности', related_name='owners')
 

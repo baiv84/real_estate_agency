@@ -1,4 +1,3 @@
-import phonenumbers
 from django.db import migrations
 
 
@@ -8,14 +7,6 @@ def copy_flat_owners(apps, schema_editor):
     Owner = apps.get_model('property', 'Owner')
 
     for flat in Flat.objects.all():
-        # flat.owner_pure_phone = None
-        # phone_number = flat.owners_phonenumber
-        # normalized_phone_number = phonenumbers.parse(phone_number, "RU")
-        # if phonenumbers.is_valid_number(normalized_phone_number):
-        #     normalized_country_code = normalized_phone_number.country_code
-        #     normalized_phone = normalized_phone_number.national_number
-        #     flat.owner_pure_phone = f'+{normalized_country_code}{normalized_phone}'
-        # flat.save()
         owner_name = flat.owner
         owners_phonenumber = flat.owners_phonenumber
         owner_pure_phone =  flat.owner_pure_phone
