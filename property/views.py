@@ -5,6 +5,7 @@ from property.models import Flat
 
 NEW_BUILDING_YEAR = 2015
 
+
 def format_price(value):
     try:
         return int(value)

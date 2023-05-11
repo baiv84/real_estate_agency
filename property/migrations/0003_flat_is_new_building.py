@@ -5,7 +5,7 @@ from django.db import migrations
 NEW_BUILDING_YEAR = 2015
 
 
-def mark_new_buildings(apps, schema_editor):
+def mark_buildings_by_age(apps, schema_editor):
     """Mark new buildings records in database"""
     Flat = apps.get_model('property', 'Flat')
     for flat in Flat.objects.filter(construction_year__gte=NEW_BUILDING_YEAR):
@@ -13,21 +13,12 @@ def mark_new_buildings(apps, schema_editor):
         flat.save()
 
 
-def mark_old_buildings(apps, schema_editor):
-    """Mark old buildings records in database"""
-    Flat = apps.get_model('property', 'Flat')
-    for flat in Flat.objects.filter(construction_year__lt=NEW_BUILDING_YEAR):
-        flat.new_building = False
-        flat.save()
-
-
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('property', '0002_flat_add_new_building'),
+        ('property', '0002_flat_new_building'),
     ]
 
     operations = [
-        migrations.RunPython(mark_old_buildings),
-        migrations.RunPython(mark_new_buildings),
+        migrations.RunPython(mark_buildings_by_age),
     ]

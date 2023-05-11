@@ -5,13 +5,29 @@ from .models import UserProfile
 from .models import Owner
 
 
+class OwnershipInline(admin.TabularInline):
+    model = Owner.flats.through
+    raw_id_fields = ('owner',)
+
+
 class FlatAdmin(admin.ModelAdmin):
     search_fields = ('town', 'address', )
     readonly_fields = ('created_at', )
-    list_display = ('address', 'price', 'new_building', 'construction_year', 'town', )
+    list_display = ('address', 'price', 'new_building',
+                    'construction_year', 'town', )
     list_editable = ('new_building', )
     list_filter = ('new_building', 'rooms_number', 'has_balcony', )
     raw_id_fields = ('liked_by',)
+
+    inlines = [
+        OwnershipInline,
+    ]
+
+
+class OwnerAdmin(admin.ModelAdmin):
+    list_display = ('owner_name', 'owners_phonenumber',
+                    'owner_pure_phone',)
+    raw_id_fields = ('flats',)
 
 
 class ComplaintAdmin(admin.ModelAdmin):
@@ -23,12 +39,6 @@ class ComplaintAdmin(admin.ModelAdmin):
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('user',)
     raw_id_fields = ('user',)
-
-
-class OwnerAdmin(admin.ModelAdmin):
-    list_display = ('owner_name', 'owners_phonenumber', \
-                    'owner_pure_phone',)
-    raw_id_fields = ('flats',)
 
 
 admin.site.register(Flat, FlatAdmin)
