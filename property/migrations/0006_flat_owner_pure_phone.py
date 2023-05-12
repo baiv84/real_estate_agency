@@ -7,13 +7,14 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('property', '0010_complaint_who'),
+        ('property', '0005_flat_liked_by'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='flat',
             name='owner_pure_phone',
-            field=phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, region=None),
+            field=phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, default=None, null=True,
+                                                                 region=None,  verbose_name='Нормализованный номер владельца'),
         ),
     ]

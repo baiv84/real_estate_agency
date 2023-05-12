@@ -18,7 +18,7 @@ def link_flats_to_owners(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('property', '0017_owner_copy_from_flat'),
+        ('property', '0010_owner_copy_from_flat'),
     ]
 
     operations = [

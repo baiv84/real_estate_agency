@@ -21,7 +21,7 @@ def copy_flat_owners(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('property', '0016_alter_owner_owner_name'),
+        ('property', '0009_make_indexes'),
     ]
 
     operations = [

@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('property', '0014_create_model_flatowner'),
+        ('property', '0007_flat_normalize_phone_numbers'),
     ]
 
     operations = [
@@ -15,17 +15,10 @@ class Migration(migrations.Migration):
             name='Owner',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('owner_name', models.CharField(max_length=100, verbose_name='ФИО собственника')),
+                ('owner_name', models.CharField(max_length=100, verbose_name='ФИО владельца')),
                 ('owners_phonenumber', models.CharField(max_length=20, verbose_name='Номер владельца')),
                 ('owner_pure_phone', phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, null=True, region=None, verbose_name='Нормализованный номер владельца')),
             ],
-        ),
-        migrations.RemoveField(
-            model_name='flat',
-            name='owned_by',
-        ),
-        migrations.DeleteModel(
-            name='FlatOwner',
         ),
         migrations.AddField(
             model_name='owner',

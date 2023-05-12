@@ -34,38 +34,11 @@ class Migration(migrations.Migration):
                 ('has_balcony', models.BooleanField(db_index=True, default=None, verbose_name='Наличие балкона')),
                 ('active', models.BooleanField(db_index=True, verbose_name='Активно-ли объявление')),
                 ('construction_year', models.IntegerField(blank=True, db_index=True, null=True, verbose_name='Год постройки здания')),
-                ('new_building', models.BooleanField(blank=True, default=None, null=True, verbose_name='Новостройка')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='UserProfile',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Owner',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('owner_name', models.CharField(db_index=True, max_length=100, verbose_name='ФИО владельца')),
-                ('owners_phonenumber', models.CharField(db_index=True, max_length=20, verbose_name='Номер владельца')),
-                ('owner_pure_phone', phonenumber_field.modelfields.PhoneNumberField(blank=True, db_index=True, max_length=128, null=True, region=None, verbose_name='Нормализованный номер владельца')),
-                ('flats', models.ManyToManyField(related_name='owners', to='property.Flat', verbose_name='Квартиры в собственности')),
             ],
         ),
         migrations.AddField(
             model_name='flat',
             name='liked_by',
-            field=models.ManyToManyField(blank=True, related_name='liked_flats', to='property.UserProfile', verbose_name='кто лайкнул'),
-        ),
-        migrations.CreateModel(
-            name='Complaint',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.TextField(null=True, verbose_name='Текст жалобы')),
-                ('flat', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='property.flat', verbose_name='Квартира, на которую жаловались')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='property.userprofile', verbose_name='Кто жаловался')),
-            ],
+            field=models.ManyToManyField(blank=True, related_name='liked_flats', to=settings.AUTH_USER_MODEL, verbose_name='кто лайкнул'),
         ),
     ]
