@@ -1,8 +1,7 @@
 from django.contrib import admin
 from .models import Flat
-from .models import Complaint
-from .models import UserProfile
 from .models import Owner
+from .models import Complaint
 
 
 class OwnershipInline(admin.TabularInline):
@@ -36,12 +35,6 @@ class ComplaintAdmin(admin.ModelAdmin):
     raw_id_fields = ('flat',)
 
 
-class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user',)
-    raw_id_fields = ('user',)
-
-
 admin.site.register(Flat, FlatAdmin)
 admin.site.register(Complaint, ComplaintAdmin)
-admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Owner, OwnerAdmin)

@@ -1,7 +1,6 @@
 from django.shortcuts import render
-
-
 from property.models import Flat
+
 
 NEW_BUILDING_YEAR = 2015
 
