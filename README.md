@@ -1,26 +1,98 @@
-# Сайт риэлторского агентства
+# Real estate simple site engine
 
-Сайт находится в разработке, поэтому доступна только страница со списком квартир и админка для наполнения БД.
+Real estate simple site engine.
 
-## Запуск
 
-- Скачайте код
-- Установите зависимости командой `pip install -r requirements.txt`
-- Создайте файл базы данных и сразу примените все миграции командой `python3 manage.py migrate`
-- Запустите сервер командой `python3 manage.py runserver`
+## Prepare virtual environment
 
-## Переменные окружения
+Install package `python3-venv` to work with python virtual environment.
 
-Часть настроек проекта берётся из переменных окружения. Чтобы их определить, создайте файл `.env` рядом с `manage.py` и запишите туда данные в таком формате: `ПЕРЕМЕННАЯ=значение`.
+Update packages on your system `!(it depends on your operating system)`
+in this document I use Ubuntu as my operating system. 
 
-Доступны 3 переменные:
-- `DEBUG` — дебаг-режим. Поставьте True, чтобы увидеть отладочную информацию в случае ошибки.
-- `SECRET_KEY` — секретный ключ проекта
-- `ALLOWED_HOSTS` — см [документацию Django](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts).
-- `DATABASE` — однострочный адрес к базе данных, например: `sqlite:///db.sqlite3`. Больше информации в [документации](https://github.com/jacobian/dj-database-url)
+So I run update command:
 
-    Это позволяет легко переключаться между базами данных: PostgreSQL, MySQL, SQLite — без разницы, нужно лишь подставить нужный адрес.
+```console
+$ sudo apt update
+```
 
-## Цели проекта
+and run command:
 
-Код написан в учебных целях — это урок в курсе по Python и веб-разработке на сайте [Devman](https://dvmn.org).
+```console
+$ sudo apt install -y python3-venv
+```
+
+Then jump to project folder:
+
+```console
+$ cd real_estate_agency
+```
+
+and create new python environment to run the code:
+```console
+$ python3 -m venv venv
+```
+
+Activate new virtual environment:
+
+```console
+$ source venv/bin/activate
+```
+
+As a result, you will see command line prompt like this:
+
+```console
+(venv) real_estate_agency $
+```
+
+Next step, install all necessary dependencies
+
+```console
+(venv) real_estate_agency $  pip3 install -r requirements.txt
+```
+
+## Prepare database file
+
+Download database file `db.sqlite3` and put it to the project folder, near `manage.py` file.
+
+
+## Run data migrations 
+
+To run data migrations, execute command:
+
+```console
+  (venv) real_estate_agency $ python3 manage.py migrate
+```
+
+Migration process takes approximately `5-7 minutes`, it depends on your workstation power.
+
+
+## Create superuser account
+
+To create superuser account, run command:
+
+```console
+  (venv) real_estate_agency $ python3 manage.py createsuperuser
+```
+
+This process accompanied with questions, you have just answer to create superuser.
+
+
+## Run real estate site
+
+To start agency site execute command:
+
+```console
+  (venv) real_estate_agency $ python3 manage.py runserver
+```
+
+Afterwards, in web browser open link: http://127.0.0.1:8000/admin/
+
+Enter `username` and `password` of superuser you have created in the previous step.
+
+As a result, you will see administration web form, where you can manipulate with all program entities (Flats, Owners, Users, Complaints).
+
+
+# Projects goals
+
+This site was written as a study project for Python web development course [Devman](https://dvmn.org)
