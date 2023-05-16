@@ -69,22 +69,23 @@ class Flat(models.Model):
     def __str__(self):
         """Object string representation"""
         return f'{self.town}, {self.address}'
-    
+
 
 class Owner(models.Model):
     """Flat owner data model"""
+
     name = models.CharField('ФИО владельца',
-                                  max_length=100,
-                                  db_index=True)
+                            max_length=100,
+                            db_index=True)
 
     phone_number = models.CharField('Номер владельца',
-                                          max_length=20,
-                                          db_index=True)
+                                    max_length=20,
+                                    db_index=True)
 
     pure_phone_number = PhoneNumberField('Нормализованный номер владельца',
-                                        null=True,
-                                        blank=True,
-                                        db_index=True)
+                                         null=True,
+                                         blank=True,
+                                         db_index=True)
 
     flats = models.ManyToManyField('Flat',
                                    verbose_name='Квартиры в собственности',
@@ -93,20 +94,20 @@ class Owner(models.Model):
     def __str__(self):
         """Object string representation"""
         return self.name
-    
-    
+
 
 class Complaint(models.Model):
     """Complaint model class"""
+
     user = models.ForeignKey(User,
                              verbose_name='Кто жаловался',
                              on_delete=models.DO_NOTHING,
-                             related_name='user_complaint')
+                             related_name='complaints')
 
     flat = models.ForeignKey(Flat,
                              verbose_name='Квартира, на которую жаловались',
                              on_delete=models.CASCADE,
-                             related_name='flat_complaint')
+                             related_name='complaints')
 
     text = models.TextField('Текст жалобы', null=True)
 

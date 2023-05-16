@@ -8,14 +8,14 @@ def normalize_phone_numbers(apps, schema_editor):
     """Normalize phone number to standard form"""
     Flat = apps.get_model('property', 'Flat')
 
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.all().iterator():
         flat.owner_pure_phone = None
         phone_number = flat.owners_phonenumber
         normalized_phone_number = phonenumbers.parse(phone_number, "RU")
         if phonenumbers.is_valid_number(normalized_phone_number):
             normalized_country_code = normalized_phone_number.country_code
             normalized_phone = normalized_phone_number.national_number
-            flat.owner_pure_phone = f'+{normalized_country_code}{normalized_phone}'
+            flat.owner_pure_phone = f'{normalized_country_code}{normalized_phone}'
         flat.save()
 
 
