@@ -10,9 +10,9 @@ def copy_flat_owners(apps, schema_editor):
         owner_name = flat.owner
         owners_phonenumber = flat.owners_phonenumber
         owner_pure_phone =  flat.owner_pure_phone
-        owner, created = Owner.objects.get_or_create(owner_name=owner_name,
-                                                     owners_phonenumber=owners_phonenumber,
-                                                     owner_pure_phone=owner_pure_phone
+        owner, created = Owner.objects.get_or_create(name=owner_name,
+                                                     phone_number=owners_phonenumber,
+                                                     pure_phone_number=owner_pure_phone
                                                     )
         if created:
             print(f'Created new owner - {owner}')

@@ -68,20 +68,20 @@ class Flat(models.Model):
 
     def __str__(self):
         """Object string representation"""
-        return f'{self.town}, {self.address} ({self.price}р.)'
-
+        return f'{self.town}, {self.address}'
+    
 
 class Owner(models.Model):
     """Flat owner data model"""
-    owner_name = models.CharField('ФИО владельца',
+    name = models.CharField('ФИО владельца',
                                   max_length=100,
                                   db_index=True)
 
-    owners_phonenumber = models.CharField('Номер владельца',
+    phone_number = models.CharField('Номер владельца',
                                           max_length=20,
                                           db_index=True)
 
-    owner_pure_phone = PhoneNumberField('Нормализованный номер владельца',
+    pure_phone_number = PhoneNumberField('Нормализованный номер владельца',
                                         null=True,
                                         blank=True,
                                         db_index=True)
@@ -92,17 +92,24 @@ class Owner(models.Model):
 
     def __str__(self):
         """Object string representation"""
-        return f'{self.owner_name}'
-
+        return self.name
+    
+    
 
 class Complaint(models.Model):
     """Complaint model class"""
     user = models.ForeignKey(User,
                              verbose_name='Кто жаловался',
-                             on_delete=models.DO_NOTHING)
+                             on_delete=models.DO_NOTHING,
+                             related_name='user_complaint')
 
     flat = models.ForeignKey(Flat,
                              verbose_name='Квартира, на которую жаловались',
-                             on_delete=models.CASCADE)
+                             on_delete=models.CASCADE,
+                             related_name='flat_complaint')
 
     text = models.TextField('Текст жалобы', null=True)
+
+    def __str__(self):
+        """Object string representation"""
+        return f'Flat - {self.flat}, person - {self.user}'

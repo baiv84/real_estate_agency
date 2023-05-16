@@ -9,7 +9,7 @@ def link_flats_to_owners(apps, schema_editor):
 
     for owner in Owner.objects.all():
         print(f'Make links with Owner - {owner}')
-        owner_name = owner.owner_name
+        owner_name = owner.name
         flats_by_owner = Flat.objects.filter(owner=owner_name)
         owner.flats.set(flats_by_owner)
 

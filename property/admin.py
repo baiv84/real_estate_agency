@@ -24,8 +24,8 @@ class FlatAdmin(admin.ModelAdmin):
 
 
 class OwnerAdmin(admin.ModelAdmin):
-    list_display = ('owner_name', 'owners_phonenumber',
-                    'owner_pure_phone',)
+    list_display = ('name', 'phone_number',
+                    'pure_phone_number',)
     raw_id_fields = ('flats',)
 
 

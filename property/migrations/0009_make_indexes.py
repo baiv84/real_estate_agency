@@ -28,17 +28,17 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='owner',
-            name='owner_name',
+            name='name',
             field=models.CharField(db_index=True, max_length=100, verbose_name='ФИО владельца'),
         ),
         migrations.AlterField(
             model_name='owner',
-            name='owner_pure_phone',
+            name='pure_phone_number',
             field=phonenumber_field.modelfields.PhoneNumberField(blank=True, db_index=True, max_length=128, null=True, region=None, verbose_name='Нормализованный номер владельца'),
         ),
         migrations.AlterField(
             model_name='owner',
-            name='owners_phonenumber',
+            name='phone_number',
             field=models.CharField(db_index=True, max_length=20, verbose_name='Номер владельца'),
         ),
     ]
