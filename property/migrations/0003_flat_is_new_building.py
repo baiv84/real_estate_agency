@@ -9,6 +9,7 @@ def mark_buildings_by_age(apps, schema_editor):
     """Mark new buildings records in database"""
     Flat = apps.get_model('property', 'Flat')
     Flat.objects.filter(construction_year__gte=NEW_BUILDING_YEAR).update(new_building=True)
+    Flat.objects.exclude(construction_year__gte=NEW_BUILDING_YEAR).update(new_building=False)
 
 
 class Migration(migrations.Migration):
